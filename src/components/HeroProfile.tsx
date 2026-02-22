@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Download, Code2, Bot } from "lucide-react";
 import avatarImg from "@/assets/avatar.png";
 import avatarDecoration from "@/assets/avatar-decoration.gif";
-import discordIdle from "@/assets/discord-idle.png";
+import discordIdle from "@/assets/discord-idle.svg";
 import badgeEarlyDev from "@/assets/badges/early-verified-bot-developer.svg";
 import badgeEarlySupporter from "@/assets/badges/early-supporter.svg";
 import badgeNitro from "@/assets/badges/nitro.svg";
