@@ -57,20 +57,35 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
         animate={isInView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        {/* Year badge - sticker style with slight rotation */}
+        {/* Year badge - double sticker style */}
         <motion.div
-          className="inline-block px-5 py-2 text-2xl font-extrabold text-primary-foreground mb-4 relative"
-          style={{
-            background: "hsl(270 70% 55%)",
-            borderRadius: "4px",
-            transform: "rotate(-2deg)",
-            clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)",
-          }}
-          initial={{ scale: 0, opacity: 0, rotate: -10 }}
-          animate={isInView ? { scale: 1, opacity: 1, rotate: -2 } : {}}
+          className="relative inline-block mb-4"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={isInView ? { scale: 1, opacity: 1 } : {}}
           transition={{ duration: 0.5, type: "spring" }}
         >
-          {item.year}
+          {/* Back sticker layer */}
+          <div
+            className="absolute inset-0 px-5 py-2"
+            style={{
+              background: "hsl(270 70% 35%)",
+              borderRadius: "4px",
+              transform: "rotate(-4deg)",
+              clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)",
+            }}
+          />
+          {/* Front sticker layer */}
+          <div
+            className="relative px-5 py-2 text-2xl font-extrabold text-primary-foreground"
+            style={{
+              background: "hsl(270 70% 55%)",
+              borderRadius: "4px",
+              transform: "rotate(-1deg)",
+              clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)",
+            }}
+          >
+            {item.year}
+          </div>
         </motion.div>
 
         <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
@@ -117,7 +132,11 @@ const JourneyTimeline = () => {
           className="mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold">
-            My <span className="inline-block px-3 py-1 text-primary-foreground relative" style={{ background: "hsl(270 70% 55%)", borderRadius: "4px", clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)", transform: "rotate(-1deg)" }}>Journey</span>
+            My{" "}
+            <span className="relative inline-block">
+              <span className="absolute inset-0 px-3 py-1" style={{ background: "hsl(270 70% 35%)", borderRadius: "4px", clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)", transform: "rotate(-3deg)" }} />
+              <span className="relative inline-block px-3 py-1 text-primary-foreground" style={{ background: "hsl(270 70% 55%)", borderRadius: "4px", clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)", transform: "rotate(-1deg)" }}>Journey</span>
+            </span>
           </h2>
           <p className="mt-3 text-muted-foreground max-w-lg">
             A timeline of my growth from a curious beginner to a Fullstack & Bot Developer.
