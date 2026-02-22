@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Download, Code2, Bot } from "lucide-react";
 import avatarImg from "@/assets/avatar.png";
 import avatarDecoration from "@/assets/avatar-decoration.gif";
+import discordIdle from "@/assets/discord-idle.png";
 import badgeEarlyDev from "@/assets/badges/early-verified-bot-developer.svg";
 import badgeEarlySupporter from "@/assets/badges/early-supporter.svg";
 import badgeNitro from "@/assets/badges/nitro.svg";
@@ -41,7 +42,7 @@ const HeroProfile = () => {
             alt="Avatar Decoration"
             className="absolute inset-0 w-full h-full object-contain z-10 pointer-events-none"
           />
-          <div className="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-muted-foreground border-4 border-card z-20" title="Offline" />
+          <img src={discordIdle} alt="Idle" className="absolute bottom-0 right-0 w-6 h-6 z-20" title="Idle" />
         </div>
 
         {/* Info */}
