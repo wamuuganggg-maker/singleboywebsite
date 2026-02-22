@@ -65,13 +65,34 @@ const MusicPlayer = () => {
         </div>
       </div>
 
-      {/* Track info */}
+      {/* Track info + equalizer */}
       <div className="p-4">
-        <h3 className="font-semibold text-foreground">Coding Lo-Fi</h3>
-        <p className="text-sm text-muted-foreground">Chill Vibes Only</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="font-semibold text-foreground">Coding Lo-Fi</h3>
+            <p className="text-sm text-muted-foreground">Chill Vibes Only</p>
+          </div>
+          {/* Equalizer bars */}
+          <div className="flex items-end gap-[3px] h-5">
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-[3px] rounded-full bg-primary"
+                animate={isPlaying ? {
+                  height: [4, 12 + Math.random() * 8, 6, 16 + Math.random() * 4, 4],
+                } : { height: 4 }}
+                transition={isPlaying ? {
+                  duration: 0.8 + Math.random() * 0.4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                } : {}}
+              />
+            ))}
+          </div>
+        </div>
 
         {/* Progress bar */}
-        <div className="mt-3 w-full h-1 rounded-full bg-secondary">
+        <div className="mt-4 w-full h-1 rounded-full bg-secondary">
           <div
             className="music-progress transition-all duration-100"
             style={{ width: `${progress}%` }}
@@ -79,14 +100,14 @@ const MusicPlayer = () => {
         </div>
 
         {/* Controls */}
-        <div className="mt-3 flex items-center justify-between">
+        <div className="mt-4 flex items-center justify-between">
           <motion.button
             onClick={() => setIsPlaying(!isPlaying)}
-            className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground"
+            className="w-12 h-12 rounded-full flex items-center justify-center text-primary-foreground bg-gradient-purple shadow-glow"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            {isPlaying ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
+            {isPlaying ? <Pause size={20} /> : <Play size={20} className="ml-0.5" />}
           </motion.button>
 
           <button
