@@ -30,7 +30,7 @@ const ToolsStack = () => {
             className="lg:w-5/12"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-3">
-              Tools & <span className="bg-primary px-2 py-0.5 text-primary-foreground rounded-md">Stack</span>
+              Tools & <span className="inline-block px-3 py-1 text-primary-foreground" style={{ background: "hsl(270 70% 55%)", borderRadius: "4px", clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)", transform: "rotate(-1deg)" }}>Stack</span>
             </h2>
             <p className="text-muted-foreground text-sm mb-6">
               I specialize in building scalable applications using modern technologies. Here is my preferred stack that I use to bring ideas to life.
