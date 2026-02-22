@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Download, Code2, Bot } from "lucide-react";
 import avatarImg from "@/assets/avatar.png";
+import avatarDecoration from "@/assets/avatar-decoration.gif";
 import badgeEarlyDev from "@/assets/badges/early-verified-bot-developer.svg";
 import badgeEarlySupporter from "@/assets/badges/early-supporter.svg";
 import badgeNitro from "@/assets/badges/nitro.svg";
@@ -21,41 +22,6 @@ const badges = [
   { src: badgeModerator, label: "Moderator" },
 ];
 
-const LaurelDecoration = () => (
-  <svg viewBox="0 0 160 160" className="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] z-10 pointer-events-none">
-    {/* Left laurel branch */}
-    {[0, 1, 2, 3, 4, 5, 6].map((i) => {
-      const angle = -40 + i * 22;
-      const rad = (angle * Math.PI) / 180;
-      const cx = 80 + Math.cos(rad) * 62;
-      const cy = 80 + Math.sin(rad) * 62;
-      return (
-        <g key={`l-${i}`} transform={`rotate(${angle + 90}, ${cx}, ${cy})`}>
-          <ellipse cx={cx} cy={cy} rx="5" ry="11" fill="hsl(45, 75%, 45%)" opacity="0.85" />
-          <ellipse cx={cx} cy={cy} rx="3.5" ry="9" fill="hsl(45, 85%, 55%)" opacity="0.7" />
-        </g>
-      );
-    })}
-    {/* Right laurel branch */}
-    {[0, 1, 2, 3, 4, 5, 6].map((i) => {
-      const angle = 220 - i * 22;
-      const rad = (angle * Math.PI) / 180;
-      const cx = 80 + Math.cos(rad) * 62;
-      const cy = 80 + Math.sin(rad) * 62;
-      return (
-        <g key={`r-${i}`} transform={`rotate(${-angle - 90}, ${cx}, ${cy})`}>
-          <ellipse cx={cx} cy={cy} rx="5" ry="11" fill="hsl(45, 75%, 45%)" opacity="0.85" />
-          <ellipse cx={cx} cy={cy} rx="3.5" ry="9" fill="hsl(45, 85%, 55%)" opacity="0.7" />
-        </g>
-      );
-    })}
-    {/* Top star */}
-    <polygon points="80,8 82,14 88,14 83,18 85,24 80,20 75,24 77,18 72,14 78,14" fill="hsl(45, 85%, 55%)" />
-    {/* Bottom ribbon */}
-    <path d="M65,148 Q72,142 80,148 Q88,142 95,148" stroke="hsl(45, 80%, 50%)" strokeWidth="2.5" fill="none" />
-  </svg>
-);
-
 const HeroProfile = () => {
   return (
     <motion.div
@@ -67,16 +33,14 @@ const HeroProfile = () => {
       <div className="flex flex-col sm:flex-row items-start gap-6">
         {/* Avatar with Discord decoration */}
         <div className="relative w-28 h-28">
-          <div className="w-full h-full rounded-full overflow-hidden border-2 border-primary/30 shadow-glow">
+          <div className="absolute inset-3 rounded-full overflow-hidden">
             <img src={avatarImg} alt="Avatar" className="w-full h-full object-cover" />
           </div>
-          <motion.div
-            className="absolute inset-0"
-            animate={{ scale: [1, 1.03, 1], opacity: [0.85, 1, 0.85] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <LaurelDecoration />
-          </motion.div>
+          <img
+            src={avatarDecoration}
+            alt="Avatar Decoration"
+            className="absolute inset-0 w-full h-full object-contain z-10 pointer-events-none"
+          />
           <div className="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-muted-foreground border-4 border-card z-20" title="Offline" />
         </div>
 
