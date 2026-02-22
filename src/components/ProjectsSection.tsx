@@ -1,18 +1,20 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
+import projectSkyverse from "@/assets/project-skyverse.png";
+import projectFreelancing from "@/assets/project-freelancing.png";
 
 const projects = [
   {
-    title: "Moonveil Landing Page",
-    desc: "A modern and sleek landing page for a Discord bot, built with React and Tailwind.",
-    image: "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=800&q=80",
+    title: "Skyverse",
+    desc: "A Minecraft server project with custom gameplay, plugins, and a vibrant community experience.",
+    image: projectSkyverse,
     color: false,
   },
   {
-    title: "Moonveil Bot",
-    desc: "An advanced all-in-one Discord bot packed with powerful features, designed for both utility and entertainment.",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80",
+    title: "Freelancing",
+    desc: "Professional freelance development services — web apps, Discord bots, and custom solutions for clients.",
+    image: projectFreelancing,
     color: true,
   },
 ];
@@ -65,7 +67,7 @@ const ProjectsSection = () => {
                 />
                 {project.color && (
                   <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary/90 text-primary-foreground text-xs font-medium">
-                    Moonveil Bot
+                    Freelancing
                   </div>
                 )}
               </div>
