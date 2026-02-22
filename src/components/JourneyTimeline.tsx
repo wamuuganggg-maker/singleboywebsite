@@ -40,12 +40,13 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
     <div ref={ref} className="relative flex items-start mb-20 last:mb-0 pl-10 md:pl-14">
       {/* Dot - outer ring + inner filled circle */}
       <motion.div
-        className="absolute left-0 top-2 z-10 -translate-x-1/2 flex items-center justify-center"
+        className="absolute left-0 top-2 z-10 flex items-center justify-center"
+        style={{ transform: "translateX(-50%)" }}
         initial={{ scale: 0 }}
         animate={isInView ? { scale: 1 } : {}}
         transition={{ duration: 0.4, type: "spring" }}
       >
-        <div className="w-3.5 h-3.5 rounded-full" style={{ background: "hsl(270 70% 55%)", boxShadow: "0 0 10px hsl(270 70% 60% / 0.8), 0 0 20px hsl(270 70% 60% / 0.4)" }} />
+        <div className="w-4 h-4 rounded-full border-[3px] border-background flex items-center justify-center" style={{ background: "hsl(270 70% 55%)", boxShadow: "0 0 10px hsl(270 70% 60% / 0.6)" }} />
       </motion.div>
 
       {/* Content */}
