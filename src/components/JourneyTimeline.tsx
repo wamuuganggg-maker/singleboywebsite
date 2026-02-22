@@ -37,14 +37,18 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <div ref={ref} className="relative flex items-start mb-16 last:mb-0 pl-8 md:pl-12">
-      {/* Dot on the line */}
+    <div ref={ref} className="relative flex items-start mb-20 last:mb-0 pl-10 md:pl-14">
+      {/* Dot - outer ring + inner filled circle */}
       <motion.div
-        className="absolute left-0 top-2 w-3 h-3 rounded-full bg-primary z-10 -translate-x-1/2 shadow-[0_0_10px_hsl(270_70%_60%/0.6)]"
+        className="absolute left-0 top-2 z-10 -translate-x-1/2 flex items-center justify-center"
         initial={{ scale: 0 }}
         animate={isInView ? { scale: 1 } : {}}
         transition={{ duration: 0.4, type: "spring" }}
-      />
+      >
+        <div className="w-6 h-6 rounded-full border-[3px] border-muted-foreground/30 bg-background flex items-center justify-center">
+          <div className="w-3 h-3 rounded-full bg-primary shadow-[0_0_10px_hsl(270_70%_60%/0.8)]" />
+        </div>
+      </motion.div>
 
       {/* Content */}
       <motion.div
@@ -53,12 +57,18 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
         animate={isInView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        {/* Year badge */}
+        {/* Year badge - sticker style with slight rotation */}
         <motion.div
-          className="inline-block px-4 py-1.5 rounded-md bg-primary text-primary-foreground text-xl font-bold mb-3"
-          initial={{ scale: 0, opacity: 0 }}
-          animate={isInView ? { scale: 1, opacity: 1 } : {}}
-          transition={{ duration: 0.4 }}
+          className="inline-block px-5 py-2 text-2xl font-extrabold text-primary-foreground mb-4 relative"
+          style={{
+            background: "hsl(270 70% 55%)",
+            borderRadius: "4px",
+            transform: "rotate(-2deg)",
+            clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)",
+          }}
+          initial={{ scale: 0, opacity: 0, rotate: -10 }}
+          animate={isInView ? { scale: 1, opacity: 1, rotate: -2 } : {}}
+          transition={{ duration: 0.5, type: "spring" }}
         >
           {item.year}
         </motion.div>
@@ -107,7 +117,7 @@ const JourneyTimeline = () => {
           className="mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold">
-            My <span className="bg-primary px-2 py-0.5 text-primary-foreground rounded-md">Journey</span>
+            My <span className="inline-block px-3 py-1 text-primary-foreground relative" style={{ background: "hsl(270 70% 55%)", borderRadius: "4px", clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)", transform: "rotate(-1deg)" }}>Journey</span>
           </h2>
           <p className="mt-3 text-muted-foreground max-w-lg">
             A timeline of my growth from a curious beginner to a Fullstack & Bot Developer.
@@ -116,14 +126,14 @@ const JourneyTimeline = () => {
 
         <div className="relative" ref={timelineRef}>
           {/* Static background line */}
-          <div className="absolute left-0 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-border/40 rounded-full" />
+          <div className="absolute left-0 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-muted-foreground/20 rounded-full" />
           {/* Animated fill line */}
           <motion.div
-            className="absolute left-0 top-0 w-[2px] -translate-x-1/2 rounded-full origin-top"
+            className="absolute left-0 top-0 w-[3px] -translate-x-1/2 rounded-full origin-top"
             style={{
               height: lineHeight,
-              background: "linear-gradient(to bottom, hsl(270 70% 60%), hsl(270 70% 60% / 0.3))",
-              boxShadow: "0 0 8px hsl(270 70% 60% / 0.4)",
+              background: "linear-gradient(to bottom, hsl(270 70% 60%), hsl(270 70% 50% / 0.5))",
+              boxShadow: "0 0 12px hsl(270 70% 60% / 0.5), 0 0 4px hsl(270 70% 60% / 0.3)",
             }}
           />
 

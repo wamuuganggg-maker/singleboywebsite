@@ -33,7 +33,7 @@ const ProjectsSection = () => {
         >
           <div>
             <h2 className="text-4xl md:text-5xl font-bold">
-              Featured <span className="bg-primary px-2 py-0.5 text-primary-foreground rounded-md">Projects</span>
+              Featured <span className="inline-block px-3 py-1 text-primary-foreground" style={{ background: "hsl(270 70% 55%)", borderRadius: "4px", clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)", transform: "rotate(-1deg)" }}>Projects</span>
             </h2>
             <p className="mt-3 text-muted-foreground text-sm italic">
               A glimpse of my recent work. Check out the full portfolio for more.

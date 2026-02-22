@@ -48,7 +48,7 @@ const ServicesSection = () => {
             </p>
             <h2 className="text-4xl md:text-5xl font-bold leading-tight">
               Creative<br />
-              <span className="bg-primary px-2 py-0.5 text-primary-foreground rounded-md">Solutions</span>
+              <span className="inline-block px-3 py-1 text-primary-foreground" style={{ background: "hsl(270 70% 55%)", borderRadius: "4px", clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)", transform: "rotate(-1deg)" }}>Solutions</span>
             </h2>
             <p className="mt-4 text-muted-foreground text-sm">
               Elevate your digital presence with tailored strategies. I help you build robust applications and automate your community workflow.

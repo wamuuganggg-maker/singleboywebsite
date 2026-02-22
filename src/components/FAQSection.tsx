@@ -72,7 +72,7 @@ const FAQSection = () => {
             className="lg:w-5/12"
           >
             <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-              Need <span className="bg-primary px-2 py-0.5 text-primary-foreground rounded-md">Help?</span>
+              Need <span className="inline-block px-3 py-1 text-primary-foreground" style={{ background: "hsl(270 70% 55%)", borderRadius: "4px", clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)", transform: "rotate(-1deg)" }}>Help?</span>
             </h2>
             <p className="text-2xl md:text-3xl text-muted-foreground mt-1">We're here to assist.</p>
             <p className="mt-4 text-muted-foreground text-sm">
