@@ -1,16 +1,24 @@
 import { motion } from "framer-motion";
-import { Download, Code2, Bot, Shield, Sparkles, Award, Bug, Heart, Zap, Star } from "lucide-react";
+import { Download, Code2, Bot } from "lucide-react";
 import avatarImg from "@/assets/avatar.png";
+import badgeEarlyDev from "@/assets/badges/early-verified-bot-developer.svg";
+import badgeEarlySupporter from "@/assets/badges/early-supporter.svg";
+import badgeNitro from "@/assets/badges/nitro.svg";
+import badgeBooster from "@/assets/badges/boost-24-month.svg";
+import badgeActiveDev from "@/assets/badges/active-developer.svg";
+import badgeHypesquad from "@/assets/badges/balance.svg";
+import badgeBugHunter from "@/assets/badges/bug-hunter-lv1.svg";
+import badgeModerator from "@/assets/badges/discord-certified-moderator.svg";
 
 const badges = [
-  { icon: Code2, label: "Early Verified Bot Developer", color: "text-green-400" },
-  { icon: Heart, label: "Early Supporter", color: "text-pink-400" },
-  { icon: Sparkles, label: "Nitro", color: "text-purple-400" },
-  { icon: Zap, label: "Booster", color: "text-pink-500" },
-  { icon: Star, label: "Active Developer", color: "text-green-500" },
-  { icon: Shield, label: "Hypesquad", color: "text-yellow-400" },
-  { icon: Bug, label: "Bug Hunter", color: "text-green-300" },
-  { icon: Award, label: "Moderator", color: "text-blue-400" },
+  { src: badgeEarlyDev, label: "Early Verified Bot Developer" },
+  { src: badgeEarlySupporter, label: "Early Supporter" },
+  { src: badgeNitro, label: "Nitro" },
+  { src: badgeBooster, label: "Booster" },
+  { src: badgeActiveDev, label: "Active Developer" },
+  { src: badgeHypesquad, label: "Hypesquad" },
+  { src: badgeBugHunter, label: "Bug Hunter" },
+  { src: badgeModerator, label: "Moderator" },
 ];
 
 const HeroProfile = () => {
@@ -44,13 +52,13 @@ const HeroProfile = () => {
             {badges.map((badge, i) => (
               <motion.div
                 key={i}
-                className={`${badge.color} cursor-pointer transition-transform hover:scale-125`}
+                className="cursor-pointer transition-transform hover:scale-125"
                 title={badge.label}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.5 + i * 0.05 }}
               >
-                <badge.icon size={18} />
+                <img src={badge.src} alt={badge.label} className="w-5 h-5" />
               </motion.div>
             ))}
           </div>
