@@ -61,7 +61,7 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
         transition={{ duration: 0.6, delay: 0.2 }}
       >
         <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
-        <div className="space-y-3">
+        <div className={`${item.items.length <= 2 ? "grid grid-cols-1 md:grid-cols-2 gap-3" : "space-y-3"}`}>
           {item.items.map((sub, i) => (
             <div key={i} className="glass-hover rounded-xl p-4 flex items-start gap-3">
               <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -95,8 +95,8 @@ const JourneyTimeline = () => {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <h2 className="text-4xl font-bold">
-            My <span className="text-gradient">Journey</span>
+          <h2 className="text-4xl md:text-5xl font-bold">
+            My <span className="bg-primary px-2 py-0.5 text-primary-foreground rounded-md">Journey</span>
           </h2>
           <p className="mt-3 text-muted-foreground max-w-lg">
             A timeline of my growth from a curious beginner to a Fullstack & Bot Developer.
