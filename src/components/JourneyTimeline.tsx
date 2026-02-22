@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Rocket, Code, Terminal, Quote, CheckCircle, Server, Zap } from "lucide-react";
+import { LayoutDashboard, Zap, CheckCircle2, Server, FileCode, MessageSquareQuote } from "lucide-react";
 
 const timelineData = [
   {
@@ -8,8 +8,8 @@ const timelineData = [
     title: "Fullstack Evolution",
     description: "Expanding my skills into Fullstack Development and modern UI/UX design.",
     items: [
-      { icon: Rocket, text: "Modern Portfolio", sub: "Built with React, Tailwind, and Framer Motion." },
-      { icon: Zap, text: "Advanced Bots", sub: "Developing complex Discord bots with dashboard integration." },
+      { icon: LayoutDashboard, color: "text-cyan-400", text: "Modern Portfolio", sub: "Built with React, Tailwind, and Framer Motion." },
+      { icon: Zap, color: "text-yellow-400", text: "Advanced Bots", sub: "Developing complex Discord bots with dashboard integration." },
     ],
   },
   {
@@ -17,9 +17,9 @@ const timelineData = [
     title: "Bot Developer",
     description: "Deep dived into Discord API and verified my first bot. Started gaining traction in the community.",
     items: [
-      { icon: CheckCircle, text: "Verified Bot Developer Badge" },
-      { icon: Server, text: "Reached 100+ Server Installs" },
-      { icon: Code, text: "Learned TypeScript & Node.js" },
+      { icon: CheckCircle2, color: "text-cyan-400", text: "Verified Bot Developer Badge" },
+      { icon: Server, color: "text-green-400", text: "Reached 100+ Server Installs" },
+      { icon: FileCode, color: "text-orange-400", text: "Learned TypeScript & Node.js" },
     ],
   },
   {
@@ -27,7 +27,7 @@ const timelineData = [
     title: "The Beginning",
     description: "The beginning of my coding journey. Started with simple scripts and Minecraft plugins.",
     items: [
-      { icon: Quote, text: '"Hello World" was just the start.' },
+      { icon: MessageSquareQuote, color: "text-purple-400", text: '"Hello World" was just the start.' },
     ],
   },
 ];
@@ -45,8 +45,8 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
         animate={isInView ? { scale: 1 } : {}}
         transition={{ duration: 0.4, type: "spring" }}
       >
-        <div className="w-6 h-6 rounded-full border-[3px] border-muted-foreground/30 bg-background flex items-center justify-center">
-          <div className="w-3 h-3 rounded-full bg-primary shadow-[0_0_10px_hsl(270_70%_60%/0.8)]" />
+        <div className="w-4 h-4 rounded-full border-2 border-muted-foreground/40 bg-background flex items-center justify-center">
+          <div className="w-2 h-2 rounded-full" style={{ background: "hsl(60 80% 55%)", boxShadow: "0 0 8px hsl(60 80% 55% / 0.8)" }} />
         </div>
       </motion.div>
 
@@ -92,9 +92,7 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
         <div className={`${item.items.length <= 2 ? "grid grid-cols-1 md:grid-cols-2 gap-3" : "space-y-3"}`}>
           {item.items.map((sub, i) => (
             <div key={i} className="glass-hover rounded-xl p-4 flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <sub.icon size={16} className="text-primary" />
-              </div>
+              <sub.icon size={16} className={`flex-shrink-0 mt-0.5 ${sub.color}`} />
               <div>
                 <p className="text-sm font-bold text-foreground">{sub.text}</p>
                 {"sub" in sub && sub.sub && (
