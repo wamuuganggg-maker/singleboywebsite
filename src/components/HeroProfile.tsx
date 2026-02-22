@@ -30,16 +30,60 @@ const HeroProfile = () => {
       transition={{ delay: 0.3, duration: 0.6 }}
     >
       <div className="flex flex-col sm:flex-row items-start gap-6">
-        {/* Avatar */}
+        {/* Avatar with Discord decoration */}
         <div className="relative">
-          <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-primary/30 shadow-glow">
+          {/* Animated decoration ring - golden laurel wreath */}
+          <div className="absolute -inset-3 z-0">
+            <svg viewBox="0 0 140 140" className="w-full h-full animate-[spin_20s_linear_infinite]" style={{ animationDirection: "normal" }}>
+              {/* Left laurel branch */}
+              {[...Array(8)].map((_, i) => (
+                <ellipse
+                  key={`l-${i}`}
+                  cx={35 - Math.sin(i * 0.35) * 12}
+                  cy={30 + i * 11}
+                  rx="6"
+                  ry="10"
+                  fill="none"
+                  stroke="hsl(45, 80%, 50%)"
+                  strokeWidth="1.5"
+                  opacity={0.7 + i * 0.03}
+                  transform={`rotate(${30 + i * 5}, ${35 - Math.sin(i * 0.35) * 12}, ${30 + i * 11})`}
+                />
+              ))}
+              {/* Right laurel branch */}
+              {[...Array(8)].map((_, i) => (
+                <ellipse
+                  key={`r-${i}`}
+                  cx={105 + Math.sin(i * 0.35) * 12}
+                  cy={30 + i * 11}
+                  rx="6"
+                  ry="10"
+                  fill="none"
+                  stroke="hsl(45, 80%, 50%)"
+                  strokeWidth="1.5"
+                  opacity={0.7 + i * 0.03}
+                  transform={`rotate(${-30 - i * 5}, ${105 + Math.sin(i * 0.35) * 12}, ${30 + i * 11})`}
+                />
+              ))}
+              {/* Top connecting piece */}
+              <circle cx="70" cy="18" r="4" fill="hsl(45, 80%, 50%)" opacity="0.8" />
+            </svg>
+          </div>
+          {/* Glow effect */}
+          <motion.div 
+            className="absolute -inset-2 rounded-full z-0"
+            style={{ background: "radial-gradient(circle, hsl(45 80% 50% / 0.15) 0%, transparent 70%)" }}
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <div className="relative z-10 w-28 h-28 rounded-full overflow-hidden border-2 border-[hsl(45,80%,50%)]/40 shadow-glow">
             <img
               src={avatarImg}
               alt="Avatar"
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-muted-foreground border-4 border-card" title="Offline" />
+          <div className="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-muted-foreground border-4 border-card z-20" title="Offline" />
         </div>
 
         {/* Info */}
