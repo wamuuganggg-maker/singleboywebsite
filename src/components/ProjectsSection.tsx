@@ -1,14 +1,14 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
-import projectSkyverse from "@/assets/project-skyverse.png";
+import projectSpotify from "@/assets/project-spotify.webp";
 import projectFreelancing from "@/assets/project-freelancing.png";
 
 const projects = [
   {
-    title: "Skyverse",
-    desc: "A Minecraft server project with custom gameplay, plugins, and a vibrant community experience.",
-    image: projectSkyverse,
+    title: "Worked For Spotify",
+    desc: "Collaborated with Spotify on music bot development, integrations, and custom audio experiences.",
+    image: projectSpotify,
     color: false,
   },
   {
