@@ -42,7 +42,7 @@ const HeroProfile = () => {
             alt="Avatar Decoration"
             className="absolute inset-0 w-full h-full object-contain z-10 pointer-events-none"
           />
-          <img src={discordIdle} alt="Idle" className="absolute bottom-0 right-0 w-6 h-6 z-20" title="Idle" />
+          <img src={discordIdle} alt="Idle" className="absolute bottom-1 right-1 w-4 h-4 z-20" title="Idle" />
         </div>
 
         {/* Info */}
