@@ -1,16 +1,39 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, Mail } from "lucide-react";
+import { ExternalLink, Mail, FlaskConical, Braces, Settings, Circle, Leaf, Code } from "lucide-react";
+
+const ToolIcon = ({ name }: { name: string }) => {
+  switch (name) {
+    case "JavaScript":
+      return <FlaskConical size={18} className="text-yellow-400" />;
+    case "TypeScript":
+      return <Braces size={18} className="text-blue-400" />;
+    case "React":
+      return <Settings size={18} className="text-cyan-400" />;
+    case "Next.js":
+      return <Circle size={18} className="text-foreground" fill="currentColor" />;
+    case "Go (Golang)":
+      return <span className="text-xs font-extrabold text-cyan-300 font-mono">GO</span>;
+    case "Discord.js":
+      return <span className="text-xs font-extrabold text-indigo-400 font-mono">DJS</span>;
+    case "MongoDB":
+      return <Leaf size={18} className="text-green-400" />;
+    case "Other Tool":
+      return <Code size={18} className="text-muted-foreground" />;
+    default:
+      return <Code size={18} className="text-muted-foreground" />;
+  }
+};
 
 const tools = [
-  { name: "JavaScript", desc: "CORE LANGUAGE", yoe: "4 YOE", emoji: "⚡", highlight: false },
-  { name: "TypeScript", desc: "TYPED SUPERSET", yoe: "3 YOE", emoji: "🔷", highlight: false },
-  { name: "React", desc: "FRONTEND LIBRARY", yoe: "4 YOE", emoji: "⚛️", highlight: false },
-  { name: "Next.js", desc: "FULLSTACK FRAMEWORK", yoe: "3 YOE", emoji: "▲", highlight: false },
-  { name: "Go (Golang)", desc: "BACKEND PERFORMANCE", yoe: "2 YOE", emoji: "🐹", highlight: false },
-  { name: "Discord.js", desc: "BOT FRAMEWORK", yoe: "4 YOE", emoji: "🤖", highlight: false },
-  { name: "MongoDB", desc: "NOSQL DATABASE", yoe: "3 YOE", emoji: "🍃", highlight: true },
-  { name: "Other Tool", desc: "EXAMPLE", yoe: "1 YOE", emoji: "<>", highlight: false },
+  { name: "JavaScript", desc: "CORE LANGUAGE", yoe: "4 YOE", highlight: false },
+  { name: "TypeScript", desc: "TYPED SUPERSET", yoe: "3 YOE", highlight: false },
+  { name: "React", desc: "FRONTEND LIBRARY", yoe: "4 YOE", highlight: false },
+  { name: "Next.js", desc: "FULLSTACK FRAMEWORK", yoe: "3 YOE", highlight: false },
+  { name: "Go (Golang)", desc: "BACKEND PERFORMANCE", yoe: "2 YOE", highlight: false },
+  { name: "Discord.js", desc: "BOT FRAMEWORK", yoe: "4 YOE", highlight: false },
+  { name: "MongoDB", desc: "NOSQL DATABASE", yoe: "3 YOE", highlight: true },
+  { name: "Other Tool", desc: "EXAMPLE", yoe: "1 YOE", highlight: false },
 ];
 
 const ToolsStack = () => {
@@ -67,7 +90,7 @@ const ToolsStack = () => {
                 transition={{ delay: i * 0.05, duration: 0.4 }}
               >
                 <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0">
-                  <span className="text-lg">{tool.emoji}</span>
+                  <ToolIcon name={tool.name} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-foreground text-sm">{tool.name}</h3>
