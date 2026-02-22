@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Rocket, Code, Terminal, Quote, CheckCircle, Server, Zap } from "lucide-react";
 
@@ -38,28 +37,32 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <div ref={ref} className="relative flex items-start mb-20 last:mb-0">
-      {/* Left - Year badge */}
-      <div className="w-1/3 flex items-start justify-end pr-8 relative">
-        {/* Dot on the line */}
-        <div className="absolute right-0 top-1 w-3 h-3 rounded-full bg-primary border-2 border-background translate-x-1/2 z-10" />
+    <div ref={ref} className="relative flex items-start mb-16 last:mb-0 pl-8 md:pl-12">
+      {/* Dot on the line */}
+      <motion.div
+        className="absolute left-0 top-1 w-4 h-4 rounded-full bg-primary border-[3px] border-background z-10 -translate-x-1/2"
+        initial={{ scale: 0 }}
+        animate={isInView ? { scale: 1 } : {}}
+        transition={{ duration: 0.4, type: "spring" }}
+      />
+
+      {/* Content */}
+      <motion.div
+        className="w-full"
+        initial={{ opacity: 0, x: 40 }}
+        animate={isInView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        {/* Year badge */}
         <motion.div
-          className="px-4 py-1.5 rounded-md bg-primary text-primary-foreground text-xl font-bold"
+          className="inline-block px-4 py-1.5 rounded-md bg-primary text-primary-foreground text-xl font-bold mb-3"
           initial={{ scale: 0, opacity: 0 }}
           animate={isInView ? { scale: 1, opacity: 1 } : {}}
           transition={{ duration: 0.4 }}
         >
           {item.year}
         </motion.div>
-      </div>
 
-      {/* Right - Content */}
-      <motion.div
-        className="w-2/3 pl-8"
-        initial={{ opacity: 0, x: 40 }}
-        animate={isInView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
         <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
         <div className={`${item.items.length <= 2 ? "grid grid-cols-1 md:grid-cols-2 gap-3" : "space-y-3"}`}>
           {item.items.map((sub, i) => (
@@ -82,14 +85,22 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
 };
 
 const JourneyTimeline = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const headerRef = useRef(null);
+  const isInView = useInView(headerRef, { once: true, margin: "-50px" });
+  const timelineRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start center", "end center"],
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <section id="journey" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div
-          ref={ref}
+          ref={headerRef}
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -103,9 +114,15 @@ const JourneyTimeline = () => {
           </p>
         </motion.div>
 
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-1/3 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-gradient-to-b from-primary/50 via-primary/30 to-transparent" />
+        <div className="relative" ref={timelineRef}>
+          {/* Static background line */}
+          <div className="absolute left-0 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-muted/30" />
+          {/* Animated fill line */}
+          <motion.div
+            className="absolute left-0 top-0 w-0.5 -translate-x-1/2 bg-gradient-to-b from-primary via-primary to-primary/50 origin-top"
+            style={{ height: lineHeight }}
+          />
+
           {timelineData.map((item, i) => (
             <TimelineItem key={item.year} item={item} index={i} />
           ))}
