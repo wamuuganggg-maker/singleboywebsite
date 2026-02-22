@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import projectSpotify from "@/assets/project-spotify.webp";
-import projectFreelancing from "@/assets/project-freelancing.png";
+import projectZafiro from "@/assets/project-zafiro.webp";
 
 const projects = [
   {
@@ -12,9 +12,9 @@ const projects = [
     color: false,
   },
   {
-    title: "Freelancing",
-    desc: "Professional freelance development services — web apps, Discord bots, and custom solutions for clients.",
-    image: projectFreelancing,
+    title: "Worked with Zafiro Internationals",
+    desc: "Collaborated with Zafiro Internationals on web development, design, and custom platform solutions.",
+    image: projectZafiro,
     color: true,
   },
 ];
