@@ -38,7 +38,7 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
 
   return (
     <div ref={ref} className="relative flex items-start mb-20 last:mb-0 pl-10 md:pl-14">
-      {/* Dot - outer ring + inner filled circle */}
+      {/* Dot - on the line */}
       <motion.div
         className="absolute left-[-7px] top-2 z-10 flex items-center justify-center"
         initial={{ scale: 0 }}
@@ -55,14 +55,13 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
         animate={isInView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        {/* Year badge - double sticker style */}
+        {/* Year badge - near the line */}
         <motion.div
           className="relative inline-block mb-4"
           initial={{ scale: 0, opacity: 0 }}
           animate={isInView ? { scale: 1, opacity: 1 } : {}}
           transition={{ duration: 0.5, type: "spring" }}
         >
-          {/* Back sticker layer - rotated opposite direction */}
           <div
             className="absolute inset-0"
             style={{
@@ -72,7 +71,6 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
               clipPath: "polygon(3% 10%, 97% 0%, 100% 90%, 0% 100%)",
             }}
           />
-          {/* Front sticker layer */}
           <div
             className="relative px-6 py-2.5 text-2xl font-extrabold text-primary-foreground"
             style={{
@@ -86,19 +84,22 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
           </div>
         </motion.div>
 
-        <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
-        <div className={`${item.items.length <= 2 ? "grid grid-cols-1 md:grid-cols-2 gap-3" : "space-y-3"}`}>
-          {item.items.map((sub, i) => (
-            <div key={i} className="glass-hover rounded-xl p-4 flex items-start gap-3">
-              <sub.icon size={16} className={`flex-shrink-0 mt-0.5 ${sub.color}`} />
-              <div>
-                <p className="text-sm font-bold text-foreground">{sub.text}</p>
-                {"sub" in sub && sub.sub && (
-                  <p className="text-xs text-muted-foreground mt-0.5">{sub.sub}</p>
-                )}
+        {/* Description and items - pushed further right */}
+        <div className="md:ml-20">
+          <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
+          <div className={`${item.items.length <= 2 ? "grid grid-cols-1 md:grid-cols-2 gap-3" : "space-y-3"}`}>
+            {item.items.map((sub, i) => (
+              <div key={i} className="glass-hover rounded-xl p-4 flex items-start gap-3">
+                <sub.icon size={16} className={`flex-shrink-0 mt-0.5 ${sub.color}`} />
+                <div>
+                  <p className="text-sm font-bold text-foreground">{sub.text}</p>
+                  {"sub" in sub && sub.sub && (
+                    <p className="text-xs text-muted-foreground mt-0.5">{sub.sub}</p>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </motion.div>
     </div>
