@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Download, Code2, Bot } from "lucide-react";
-import avatarImg from "@/assets/avatar.png";
-import avatarDecoration from "@/assets/avatar-decoration.gif";
+import avatarWithDeco from "@/assets/avatar-with-deco.gif";
 import discordIdle from "@/assets/discord-idle.svg";
 import badgeEarlyDev from "@/assets/badges/early-verified-bot-developer.svg";
 import badgeEarlySupporter from "@/assets/badges/early-supporter.svg";
@@ -34,13 +33,10 @@ const HeroProfile = () => {
       <div className="flex flex-col sm:flex-row items-start gap-6">
         {/* Avatar with Discord decoration */}
         <div className="relative w-28 h-28">
-          <div className="absolute inset-3 rounded-full overflow-hidden">
-            <img src={avatarImg} alt="Avatar" className="w-full h-full object-cover" />
-          </div>
           <img
-            src={avatarDecoration}
-            alt="Avatar Decoration"
-            className="absolute inset-0 w-full h-full object-contain z-10 pointer-events-none"
+            src={avatarWithDeco}
+            alt="Avatar with Decoration"
+            className="w-full h-full object-contain"
           />
           <img src={discordIdle} alt="Idle" className="absolute bottom-0.5 right-0.5 w-5 h-5 z-20" title="Idle" />
         </div>
