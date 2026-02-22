@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Rocket, Code, Terminal, Quote } from "lucide-react";
+import { Rocket, Code, Terminal, Quote, CheckCircle, Server, Zap } from "lucide-react";
 
 const timelineData = [
   {
@@ -10,7 +10,7 @@ const timelineData = [
     description: "Expanding my skills into Fullstack Development and modern UI/UX design.",
     items: [
       { icon: Rocket, text: "Modern Portfolio", sub: "Built with React, Tailwind, and Framer Motion." },
-      { icon: Code, text: "Advanced Bots", sub: "Developing complex Discord bots with dashboard integration." },
+      { icon: Zap, text: "Advanced Bots", sub: "Developing complex Discord bots with dashboard integration." },
     ],
   },
   {
@@ -18,8 +18,8 @@ const timelineData = [
     title: "Bot Developer",
     description: "Deep dived into Discord API and verified my first bot. Started gaining traction in the community.",
     items: [
-      { icon: Terminal, text: "Verified Bot Developer Badge" },
-      { icon: Rocket, text: "Reached 100+ Server Installs" },
+      { icon: CheckCircle, text: "Verified Bot Developer Badge" },
+      { icon: Server, text: "Reached 100+ Server Installs" },
       { icon: Code, text: "Learned TypeScript & Node.js" },
     ],
   },
@@ -36,45 +36,45 @@ const timelineData = [
 const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const isLeft = index % 2 === 0;
 
   return (
-    <div ref={ref} className="relative flex items-start justify-center mb-16">
-      {/* Year badge */}
-      <motion.div
-        className="absolute left-1/2 -translate-x-1/2 z-10 px-4 py-1.5 rounded-full bg-gradient-purple text-primary-foreground text-sm font-bold"
-        initial={{ scale: 0 }}
-        animate={isInView ? { scale: 1 } : {}}
-        transition={{ duration: 0.4 }}
-      >
-        {item.year}
-      </motion.div>
+    <div ref={ref} className="relative flex items-start mb-20 last:mb-0">
+      {/* Left - Year badge */}
+      <div className="w-1/3 flex items-start justify-end pr-8 relative">
+        {/* Dot on the line */}
+        <div className="absolute right-0 top-1 w-3 h-3 rounded-full bg-primary border-2 border-background translate-x-1/2 z-10" />
+        <motion.div
+          className="px-4 py-1.5 rounded-md bg-primary text-primary-foreground text-xl font-bold"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={isInView ? { scale: 1, opacity: 1 } : {}}
+          transition={{ duration: 0.4 }}
+        >
+          {item.year}
+        </motion.div>
+      </div>
 
-      {/* Content card */}
+      {/* Right - Content */}
       <motion.div
-        className={`w-full md:w-5/12 mt-12 ${isLeft ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"}`}
-        initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
+        className="w-2/3 pl-8"
+        initial={{ opacity: 0, x: 40 }}
         animate={isInView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <div className="glass-hover rounded-2xl p-5">
-          <h4 className="text-lg font-bold text-foreground mb-1">{item.title}</h4>
-          <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
-          <div className="space-y-3">
-            {item.items.map((sub, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <sub.icon size={16} className="text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-foreground">{sub.text}</p>
-                  {"sub" in sub && sub.sub && (
-                    <p className="text-xs text-muted-foreground mt-0.5">{sub.sub}</p>
-                  )}
-                </div>
+        <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
+        <div className="space-y-3">
+          {item.items.map((sub, i) => (
+            <div key={i} className="glass-hover rounded-xl p-4 flex items-start gap-3">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <sub.icon size={16} className="text-primary" />
               </div>
-            ))}
-          </div>
+              <div>
+                <p className="text-sm font-bold text-foreground">{sub.text}</p>
+                {"sub" in sub && sub.sub && (
+                  <p className="text-xs text-muted-foreground mt-0.5">{sub.sub}</p>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       </motion.div>
     </div>
@@ -104,7 +104,8 @@ const JourneyTimeline = () => {
         </motion.div>
 
         <div className="relative">
-          <div className="timeline-line hidden md:block" />
+          {/* Vertical line */}
+          <div className="absolute left-1/3 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-gradient-to-b from-primary/50 via-primary/30 to-transparent" />
           {timelineData.map((item, i) => (
             <TimelineItem key={item.year} item={item} index={i} />
           ))}
