@@ -45,9 +45,7 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
         animate={isInView ? { scale: 1 } : {}}
         transition={{ duration: 0.4, type: "spring" }}
       >
-        <div className="w-4 h-4 rounded-full border-2 border-muted-foreground/40 bg-background flex items-center justify-center">
-          <div className="w-2 h-2 rounded-full" style={{ background: "hsl(60 80% 55%)", boxShadow: "0 0 8px hsl(60 80% 55% / 0.8)" }} />
-        </div>
+        <div className="w-3.5 h-3.5 rounded-full" style={{ background: "hsl(270 70% 55%)", boxShadow: "0 0 10px hsl(270 70% 60% / 0.8), 0 0 20px hsl(270 70% 60% / 0.4)" }} />
       </motion.div>
 
       {/* Content */}
