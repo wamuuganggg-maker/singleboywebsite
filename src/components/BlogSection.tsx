@@ -1,20 +1,21 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Calendar, ArrowRight } from "lucide-react";
+import blogMinecraft from "@/assets/blog-minecraft.png";
+import blogDiscord from "@/assets/blog-discord.png";
 
 const posts = [
   {
     title: "minecraft-basic-tips",
     excerpt: "A few tips and tricks I learned while managing my own Minecraft community server.",
     date: "NOVEMBER 24, 2025",
-    image: "https://images.unsplash.com/photo-1563207153-f403bf289096?w=800&q=80",
+    image: blogMinecraft,
   },
   {
     title: "discord-bots-basic",
     excerpt: "Creating your own Discord bot isn't as complicated as it might sound. With a basic understanding of **JavaScript** and the **Discord API**...",
     date: "NOVEMBER 24, 2025",
-    image: "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=800&q=80",
-    highlight: true,
+    image: blogDiscord,
   },
 ];
 
@@ -53,7 +54,7 @@ const BlogSection = () => {
           {posts.map((post, i) => (
             <motion.div
               key={post.title}
-              className={`glass-hover rounded-2xl overflow-hidden group cursor-pointer ${post.highlight ? "glow-border" : ""}`}
+              className="glass-hover rounded-2xl overflow-hidden group cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.1 + i * 0.1, duration: 0.5 }}
@@ -70,7 +71,7 @@ const BlogSection = () => {
                   <Calendar size={12} className="text-muted-foreground" />
                   <span className="text-xs text-muted-foreground font-mono uppercase">{post.date}</span>
                 </div>
-                <h3 className={`font-bold mb-2 ${post.highlight ? "text-primary" : "text-foreground"}`}>
+                <h3 className="font-bold mb-2 text-foreground">
                   {post.title}
                 </h3>
                 <p className="text-sm text-muted-foreground">{post.excerpt}</p>
