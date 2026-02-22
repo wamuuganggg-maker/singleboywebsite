@@ -29,9 +29,9 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="fixed top-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2"
-      initial={{ y: -60, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      className="fixed top-4 left-1/2 z-40 flex items-center gap-2"
+      initial={{ x: "-50%", y: -60, opacity: 0 }}
+      animate={{ x: "-50%", y: 0, opacity: 1 }}
       transition={{ delay: 0.2, duration: 0.5 }}
     >
       <div className="flex items-center gap-1 glass rounded-2xl px-3 py-2">
