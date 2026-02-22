@@ -56,7 +56,7 @@ const MusicPlayer = () => {
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-lg font-bold text-foreground">Coding Lo-Fi</h3>
-            <p className="text-sm text-muted-foreground">Chill Vibes Only</p>
+            <p className="text-sm text-muted-foreground">Creating A New Space!!</p>
           </div>
           {/* Equalizer bars */}
           <div className="flex items-end gap-[3px] h-5">
