@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { HelpCircle, ChevronDown, ArrowRight } from "lucide-react";
+import { Plus, Minus, ArrowRight } from "lucide-react";
 
 const faqs = [
   {
@@ -25,35 +25,30 @@ const faqs = [
   },
 ];
 
-const FAQItem = ({ faq, index }: { faq: typeof faqs[0]; index: number }) => {
-  const [open, setOpen] = useState(false);
-
+const FAQItem = ({ faq, index, isOpen, onToggle }: { faq: typeof faqs[0]; index: number; isOpen: boolean; onToggle: () => void }) => {
   return (
     <motion.div
-      className="glass-hover rounded-2xl overflow-hidden"
+      className="border-b border-border last:border-b-0"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
     >
       <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between p-5 text-left"
+        onClick={onToggle}
+        className="w-full flex items-center justify-between py-5 px-1 text-left"
       >
-        <span className="font-medium text-foreground text-sm">{faq.q}</span>
-        <motion.div
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <ChevronDown size={18} className="text-muted-foreground" />
-        </motion.div>
+        <span className={`font-medium text-sm ${isOpen ? "text-primary" : "text-foreground"}`}>{faq.q}</span>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-4 ${isOpen ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}>
+          {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+        </div>
       </button>
       <motion.div
         initial={false}
-        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
         transition={{ duration: 0.3 }}
         className="overflow-hidden"
       >
-        <p className="px-5 pb-5 text-sm text-muted-foreground">{faq.a}</p>
+        <p className="px-1 pb-5 text-sm text-muted-foreground">{faq.a}</p>
       </motion.div>
     </motion.div>
   );
@@ -62,38 +57,49 @@ const FAQItem = ({ faq, index }: { faq: typeof faqs[0]; index: number }) => {
 const FAQSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [openIndex, setOpenIndex] = useState(0);
 
   return (
     <section className="py-20 px-4">
-      <div className="max-w-3xl mx-auto">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10"
-        >
-          <HelpCircle size={32} className="text-primary mx-auto mb-3" />
-          <h2 className="text-3xl font-bold">
-            Need Help? <span className="text-gradient">We're here to assist.</span>
-          </h2>
-          <p className="mt-3 text-muted-foreground">
-            Still have questions? Feel free to contact our friendly support team.
-          </p>
-          <motion.a
-            href="#contact"
-            className="inline-flex items-center gap-2 mt-4 px-5 py-2.5 rounded-xl bg-gradient-purple text-primary-foreground text-sm font-medium"
-            whileHover={{ scale: 1.02 }}
+      <div className="max-w-5xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-12">
+          {/* Left side */}
+          <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="lg:w-5/12"
           >
-            Contact Support
-            <ArrowRight size={14} />
-          </motion.a>
-        </motion.div>
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+              Need <span className="bg-primary px-2 py-0.5 text-primary-foreground rounded-md">Help?</span>
+            </h2>
+            <p className="text-2xl md:text-3xl text-muted-foreground mt-1">We're here to assist.</p>
+            <p className="mt-4 text-muted-foreground text-sm">
+              Still have questions? Feel free to contact our friendly support team specialists.
+            </p>
+            <motion.a
+              href="#contact"
+              className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-xl bg-foreground text-background text-sm font-medium"
+              whileHover={{ scale: 1.02 }}
+            >
+              Contact Support
+              <ArrowRight size={14} />
+            </motion.a>
+          </motion.div>
 
-        <div className="space-y-3">
-          {faqs.map((faq, i) => (
-            <FAQItem key={i} faq={faq} index={i} />
-          ))}
+          {/* Right side - FAQ */}
+          <div className="lg:w-7/12">
+            {faqs.map((faq, i) => (
+              <FAQItem
+                key={i}
+                faq={faq}
+                index={i}
+                isOpen={openIndex === i}
+                onToggle={() => setOpenIndex(openIndex === i ? -1 : i)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

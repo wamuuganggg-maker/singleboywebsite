@@ -8,6 +8,7 @@ import ToolsStack from "@/components/ToolsStack";
 import ServicesSection from "@/components/ServicesSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import BlogSection from "@/components/BlogSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
 import CookieBanner from "@/components/CookieBanner";
@@ -42,6 +43,7 @@ const Index = () => {
       <ServicesSection />
       <ProjectsSection />
       <BlogSection />
+      <TestimonialsSection />
       <FAQSection />
       <ContactSection />
       <Footer />
