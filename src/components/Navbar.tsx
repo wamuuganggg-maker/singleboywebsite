@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Home, FolderOpen, BookOpen, Moon, LogIn } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Home, FolderOpen, BookOpen, Moon, Sun, LogIn } from "lucide-react";
 import { motion } from "framer-motion";
 
 const navItems = [
@@ -10,6 +10,16 @@ const navItems = [
 
 const Navbar = () => {
   const [active, setActive] = useState("Home");
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.remove("light");
+    } else {
+      root.classList.add("light");
+    }
+  }, [isDark]);
 
   const handleClick = (label: string, href: string) => {
     setActive(label);
@@ -24,7 +34,7 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.2, duration: 0.5 }}
     >
-      <div className="flex items-center gap-1 glass rounded-2xl px-2 py-2">
+      <div className="flex items-center gap-1 glass rounded-2xl px-3 py-2">
         {navItems.map((item) => (
           <button
             key={item.label}
@@ -41,17 +51,20 @@ const Navbar = () => {
                 className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-6 h-0.5 rounded-full bg-primary"
               />
             )}
-            <item.icon size={20} />
+            <item.icon size={22} />
           </button>
         ))}
       </div>
 
-      <div className="flex items-center gap-1 glass rounded-2xl px-2 py-2">
-        <button className="p-3 rounded-xl text-muted-foreground hover:text-foreground transition-colors">
-          <Moon size={20} />
+      <div className="flex items-center gap-1 glass rounded-2xl px-3 py-2">
+        <button
+          onClick={() => setIsDark(!isDark)}
+          className="p-3 rounded-xl text-muted-foreground hover:text-foreground transition-colors"
+        >
+          {isDark ? <Moon size={22} /> : <Sun size={22} />}
         </button>
         <button className="p-3 rounded-xl text-muted-foreground hover:text-foreground transition-colors">
-          <LogIn size={20} />
+          <LogIn size={22} />
         </button>
       </div>
     </motion.nav>

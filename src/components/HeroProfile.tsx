@@ -58,7 +58,7 @@ const HeroProfile = () => {
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.5 + i * 0.05 }}
               >
-                <img src={badge.src} alt={badge.label} className="w-5 h-5" />
+                <img src={badge.src} alt={badge.label} className="w-6 h-6" />
               </motion.div>
             ))}
           </div>

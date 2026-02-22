@@ -40,7 +40,7 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
     <div ref={ref} className="relative flex items-start mb-16 last:mb-0 pl-8 md:pl-12">
       {/* Dot on the line */}
       <motion.div
-        className="absolute left-0 top-1 w-4 h-4 rounded-full bg-primary border-[3px] border-background z-10 -translate-x-1/2"
+        className="absolute left-0 top-2 w-3 h-3 rounded-full bg-primary z-10 -translate-x-1/2 shadow-[0_0_10px_hsl(270_70%_60%/0.6)]"
         initial={{ scale: 0 }}
         animate={isInView ? { scale: 1 } : {}}
         transition={{ duration: 0.4, type: "spring" }}
@@ -116,11 +116,15 @@ const JourneyTimeline = () => {
 
         <div className="relative" ref={timelineRef}>
           {/* Static background line */}
-          <div className="absolute left-0 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-muted/30" />
+          <div className="absolute left-0 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-border/40 rounded-full" />
           {/* Animated fill line */}
           <motion.div
-            className="absolute left-0 top-0 w-0.5 -translate-x-1/2 bg-gradient-to-b from-primary via-primary to-primary/50 origin-top"
-            style={{ height: lineHeight }}
+            className="absolute left-0 top-0 w-[2px] -translate-x-1/2 rounded-full origin-top"
+            style={{
+              height: lineHeight,
+              background: "linear-gradient(to bottom, hsl(270 70% 60%), hsl(270 70% 60% / 0.3))",
+              boxShadow: "0 0 8px hsl(270 70% 60% / 0.4)",
+            }}
           />
 
           {timelineData.map((item, i) => (

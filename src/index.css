@@ -6,22 +6,22 @@
 
 @layer base {
   :root {
-    --background: 240 10% 6%;
+    --background: 0 0% 0%;
     --foreground: 240 10% 90%;
 
-    --card: 240 10% 10%;
+    --card: 0 0% 7%;
     --card-foreground: 240 10% 90%;
 
-    --popover: 240 10% 10%;
+    --popover: 0 0% 7%;
     --popover-foreground: 240 10% 90%;
 
     --primary: 270 70% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 10% 14%;
+    --secondary: 0 0% 10%;
     --secondary-foreground: 240 10% 90%;
 
-    --muted: 240 10% 14%;
+    --muted: 0 0% 10%;
     --muted-foreground: 240 10% 55%;
 
     --accent: 270 70% 60%;
@@ -30,31 +30,80 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 240 10% 18%;
-    --input: 240 10% 18%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
     --ring: 270 70% 60%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 240 10% 8%;
+    --sidebar-background: 0 0% 5%;
     --sidebar-foreground: 240 10% 90%;
     --sidebar-primary: 270 70% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 10% 14%;
+    --sidebar-accent: 0 0% 10%;
     --sidebar-accent-foreground: 240 10% 90%;
-    --sidebar-border: 240 10% 18%;
+    --sidebar-border: 0 0% 14%;
     --sidebar-ring: 270 70% 60%;
 
     /* Custom tokens */
     --glow-purple: 270 70% 60%;
     --glow-blue: 220 70% 55%;
-    --surface-elevated: 240 10% 12%;
-    --surface-hover: 240 10% 16%;
+    --surface-elevated: 0 0% 8%;
+    --surface-hover: 0 0% 12%;
     --text-dim: 240 10% 45%;
     --gradient-purple: linear-gradient(135deg, hsl(270 70% 60%), hsl(290 70% 50%));
     --gradient-purple-blue: linear-gradient(135deg, hsl(270 70% 60%), hsl(220 70% 55%));
     --shadow-glow: 0 0 30px -5px hsl(270 70% 60% / 0.3);
     --shadow-glow-strong: 0 0 50px -10px hsl(270 70% 60% / 0.5);
+  }
+
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 240 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 10%;
+
+    --primary: 270 70% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 5% 92%;
+    --secondary-foreground: 240 10% 20%;
+
+    --muted: 240 5% 92%;
+    --muted-foreground: 240 10% 40%;
+
+    --accent: 270 70% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 5% 85%;
+    --input: 240 5% 85%;
+    --ring: 270 70% 55%;
+
+    --sidebar-background: 0 0% 96%;
+    --sidebar-foreground: 240 10% 10%;
+    --sidebar-primary: 270 70% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 5% 92%;
+    --sidebar-accent-foreground: 240 10% 10%;
+    --sidebar-border: 240 5% 85%;
+    --sidebar-ring: 270 70% 55%;
+
+    --glow-purple: 270 70% 55%;
+    --glow-blue: 220 70% 50%;
+    --surface-elevated: 0 0% 96%;
+    --surface-hover: 0 0% 92%;
+    --text-dim: 240 10% 55%;
+    --gradient-purple: linear-gradient(135deg, hsl(270 70% 55%), hsl(290 70% 45%));
+    --gradient-purple-blue: linear-gradient(135deg, hsl(270 70% 55%), hsl(220 70% 50%));
+    --shadow-glow: 0 0 30px -5px hsl(270 70% 55% / 0.2);
+    --shadow-glow-strong: 0 0 50px -10px hsl(270 70% 55% / 0.3);
   }
 }
 
@@ -185,7 +234,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(240 10% 6%);
+  background: hsl(var(--background));
 }
 
 ::-webkit-scrollbar-thumb {
