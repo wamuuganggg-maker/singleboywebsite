@@ -22,8 +22,8 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img src={avatarImg} alt="Gaeuly" className="w-10 h-10 rounded-full" />
-              <span className="text-lg font-bold text-foreground">Gaeuly</span>
+              <img src={avatarImg} alt="Pratiyush" className="w-10 h-10 rounded-full" />
+              <span className="text-lg font-bold text-foreground">Pratiyush</span>
             </div>
             <p className="text-sm text-muted-foreground italic mb-5">
               A Fullstack & Discord Bot Developer passionate about building scalable applications and automation tools.
@@ -69,7 +69,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="border-t border-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2026 Gaeuly. All rights reserved.
+            © 2026 Pratiyush. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Terms of Service</a>
