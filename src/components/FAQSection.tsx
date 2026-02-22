@@ -72,7 +72,7 @@ const FAQSection = () => {
             className="lg:w-5/12"
           >
             <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-              Need{" "}<span className="relative inline-block"><span className="absolute inset-0 px-3 py-1" style={{ background: "hsl(270 70% 35%)", borderRadius: "4px", clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)", transform: "rotate(-3deg)" }} /><span className="relative inline-block px-3 py-1 text-primary-foreground" style={{ background: "hsl(270 70% 55%)", borderRadius: "4px", clipPath: "polygon(2% 8%, 98% 0%, 100% 92%, 0% 100%)", transform: "rotate(-1deg)" }}>Help?</span></span>
+              Need{" "}<span className="relative inline-block"><span className="absolute inset-0" style={{ background: "hsl(270 70% 35%)", borderRadius: "6px", clipPath: "polygon(3% 10%, 97% 0%, 100% 90%, 0% 100%)", transform: "rotate(3deg) scale(1.05)" }} /><span className="relative inline-block px-3 py-1 text-primary-foreground" style={{ background: "hsl(270 70% 55%)", borderRadius: "6px", clipPath: "polygon(2% 8%, 98% 2%, 97% 92%, 1% 100%)", transform: "rotate(-2deg)" }}>Help?</span></span>
             </h2>
             <p className="text-2xl md:text-3xl text-muted-foreground mt-1">We're here to assist.</p>
             <p className="mt-4 text-muted-foreground text-sm">
