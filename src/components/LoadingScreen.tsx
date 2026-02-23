@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import avatarImg from "@/assets/avatar.png";
 
 const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
@@ -9,14 +10,13 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 500);
+          setTimeout(onComplete, 600);
           return 100;
         }
-        // Slow down near the end for a natural feel
-        const increment = prev < 70 ? 3 : prev < 90 ? 1.5 : 0.5;
+        const increment = prev < 40 ? 4 : prev < 70 ? 2.5 : prev < 90 ? 1.2 : 0.4;
         return Math.min(prev + increment, 100);
       });
-    }, 40);
+    }, 35);
     return () => clearInterval(interval);
   }, [onComplete]);
 
@@ -24,29 +24,55 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
     <AnimatePresence>
       {progress <= 100 && (
         <motion.div
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background"
-          exit={{ opacity: 0, scale: 1.02 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background overflow-hidden"
+          exit={{ opacity: 0, scale: 1.05 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Glowing orb background effect */}
-          <div className="absolute inset-0 overflow-hidden">
+          {/* Glowing orb background */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full opacity-20 blur-[100px]"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full opacity-20 blur-[120px]"
               style={{ background: "hsl(var(--primary))" }}
               animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.15, 0.25, 0.15],
+                scale: [1, 1.4, 1],
+                opacity: [0.1, 0.3, 0.1],
               }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             />
+            <motion.div
+              className="absolute top-1/3 right-1/4 w-[200px] h-[200px] rounded-full opacity-10 blur-[80px]"
+              style={{ background: "hsl(var(--glow-blue))" }}
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.05, 0.15, 0.05],
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            />
           </div>
 
-          {/* Logo / Name */}
+          {/* Avatar */}
+          <motion.div
+            className="relative z-10 mb-6"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
+          >
+            <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-primary/30 shadow-glow">
+              <img src={avatarImg} alt="Pratiyush" className="w-full h-full object-cover" />
+            </div>
+            <motion.div
+              className="absolute -inset-1 rounded-full border border-primary/20"
+              animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </motion.div>
+
+          {/* Name */}
           <motion.h1
             className="text-2xl font-bold text-foreground tracking-wider mb-1 relative z-10"
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           >
             PRATIYUSH
           </motion.h1>
@@ -55,17 +81,22 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
             className="text-xs font-mono text-muted-foreground mb-8 tracking-[0.3em] uppercase relative z-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
           >
             Developer
           </motion.p>
 
           {/* Progress bar */}
-          <div className="w-56 h-[2px] rounded-full bg-secondary/50 overflow-hidden relative z-10">
+          <div className="w-56 h-[3px] rounded-full bg-secondary/50 overflow-hidden relative z-10">
             <motion.div
-              className="h-full rounded-full bg-gradient-to-r from-primary to-primary/60"
-              style={{ width: `${progress}%` }}
-              transition={{ ease: "linear" }}
+              className="h-full rounded-full"
+              style={{
+                width: `${progress}%`,
+                background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--glow-blue)), hsl(var(--primary)))",
+                backgroundSize: "200% 100%",
+              }}
+              animate={{ backgroundPosition: ["0% 0%", "200% 0%"] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
             />
           </div>
 

@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { Star, Quote, Plus } from "lucide-react";
 
 const testimonials = [
@@ -35,12 +35,10 @@ const testimonials = [
   },
 ];
 
-// Double the array for seamless infinite scroll
-const doubledTestimonials = [...testimonials, ...testimonials];
-
 const TestimonialsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const doubledTestimonials = useMemo(() => [...testimonials, ...testimonials], []);
 
   return (
     <section className="py-20 px-4 overflow-hidden">
@@ -92,48 +90,38 @@ const TestimonialsSection = () => {
         </motion.div>
       </div>
 
-      {/* Infinite scrolling marquee */}
+      {/* CSS-based marquee for zero-lag infinite scroll */}
       <div className="relative w-full">
-        {/* Fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-background to-transparent pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-background to-transparent pointer-events-none" />
 
-        <motion.div
-          className="flex gap-5 w-max"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 25,
-              ease: "linear",
-            },
-          }}
-        >
-          {doubledTestimonials.map((t, i) => (
-            <div
-              key={i}
-              className="glass-hover rounded-2xl p-6 flex flex-col w-[280px] shrink-0"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, j) => (
-                    <Star key={j} size={14} className="text-yellow-400 fill-yellow-400" />
-                  ))}
+        <div className="marquee-container">
+          <div className="marquee-track">
+            {doubledTestimonials.map((t, i) => (
+              <div
+                key={i}
+                className="glass-hover rounded-2xl p-6 flex flex-col w-[280px] shrink-0"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex gap-1">
+                    {[...Array(5)].map((_, j) => (
+                      <Star key={j} size={14} className="text-yellow-400 fill-yellow-400" />
+                    ))}
+                  </div>
+                  <Quote size={28} className="text-primary/30" />
                 </div>
-                <Quote size={28} className="text-primary/30" />
-              </div>
-              <p className="text-sm text-muted-foreground mb-4 italic">"{t.text}"</p>
-              <div className="border-t border-border pt-4 mt-auto flex items-center gap-3">
-                <img src={t.avatar} alt={t.author} className="w-10 h-10 rounded-full" />
-                <div>
-                  <p className="text-sm font-bold text-foreground">{t.author}</p>
-                  <p className="text-xs text-primary">{t.role}</p>
+                <p className="text-sm text-muted-foreground mb-4 italic">"{t.text}"</p>
+                <div className="border-t border-border pt-4 mt-auto flex items-center gap-3">
+                  <img src={t.avatar} alt={t.author} className="w-10 h-10 rounded-full" loading="lazy" />
+                  <div>
+                    <p className="text-sm font-bold text-foreground">{t.author}</p>
+                    <p className="text-xs text-primary">{t.role}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
