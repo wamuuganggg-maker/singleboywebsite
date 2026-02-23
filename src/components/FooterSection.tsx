@@ -15,7 +15,7 @@ const resourceLinks = [
 
 const Footer = () => {
   return (
-    <footer className="pt-16 pb-8 px-4 border-t border-white/10 bg-[#0d0d0d]">
+    <footer className="pt-16 pb-8 px-4 border-t border-white/10 bg-black">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
