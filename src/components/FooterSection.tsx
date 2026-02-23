@@ -26,7 +26,7 @@ const Footer = () => {
               <span className="text-lg font-bold text-foreground">Pratiyush</span>
             </div>
             <p className="text-sm text-muted-foreground italic mb-5">
-              A Fullstack & Discord Bot Developer passionate about building scalable applications and automation tools.
+              I design and develop modern, scalable web applications with clean code and seamless user experience.
             </p>
             <div className="flex items-center gap-3">
               <a href="https://github.com" target="_blank" className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
