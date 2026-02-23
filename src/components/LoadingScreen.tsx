@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import avatarImg from "@/assets/avatar.png";
 
 const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
@@ -28,60 +27,70 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Glowing orb background */}
+          {/* Glowing orbs */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <motion.div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full opacity-20 blur-[120px]"
               style={{ background: "hsl(var(--primary))" }}
-              animate={{
-                scale: [1, 1.4, 1],
-                opacity: [0.1, 0.3, 0.1],
-              }}
+              animate={{ scale: [1, 1.4, 1], opacity: [0.1, 0.3, 0.1] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.div
               className="absolute top-1/3 right-1/4 w-[200px] h-[200px] rounded-full opacity-10 blur-[80px]"
               style={{ background: "hsl(var(--glow-blue))" }}
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.05, 0.15, 0.05],
-              }}
+              animate={{ scale: [1, 1.3, 1], opacity: [0.05, 0.15, 0.05] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             />
+
+            {/* Floating particles */}
+            {[...Array(6)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 rounded-full bg-primary/40"
+                style={{
+                  left: `${20 + i * 12}%`,
+                  top: `${30 + (i % 3) * 20}%`,
+                }}
+                animate={{
+                  y: [0, -30, 0],
+                  opacity: [0, 0.6, 0],
+                }}
+                transition={{
+                  duration: 2.5 + i * 0.3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.4,
+                }}
+              />
+            ))}
           </div>
 
-          {/* Avatar */}
+          {/* Name with staggered letter animation */}
           <motion.div
-            className="relative z-10 mb-6"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
+            className="relative z-10 mb-1 flex overflow-hidden"
+            initial="hidden"
+            animate="visible"
           >
-            <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-primary/30 shadow-glow">
-              <img src={avatarImg} alt="Pratiyush" className="w-full h-full object-cover" />
-            </div>
-            <motion.div
-              className="absolute -inset-1 rounded-full border border-primary/20"
-              animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
+            {"PRATIYUSH".split("").map((letter, i) => (
+              <motion.span
+                key={i}
+                className="text-2xl font-bold text-foreground tracking-wider"
+                variants={{
+                  hidden: { y: 40, opacity: 0 },
+                  visible: { y: 0, opacity: 1 },
+                }}
+                transition={{ duration: 0.4, delay: 0.1 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {letter}
+              </motion.span>
+            ))}
           </motion.div>
-
-          {/* Name */}
-          <motion.h1
-            className="text-2xl font-bold text-foreground tracking-wider mb-1 relative z-10"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            PRATIYUSH
-          </motion.h1>
 
           <motion.p
             className="text-xs font-mono text-muted-foreground mb-8 tracking-[0.3em] uppercase relative z-10"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
           >
             Developer
           </motion.p>
