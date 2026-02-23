@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Home, FolderOpen, BookOpen, Moon, Sun, LogIn } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -21,11 +21,17 @@ const Navbar = () => {
     }
   }, [isDark]);
 
-  const handleClick = (label: string, href: string) => {
+  const handleClick = useCallback((label: string, href: string) => {
     setActive(label);
     const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: "smooth" });
-  };
+    if (!el) return;
+    const lenis = (window as any).__lenis;
+    if (lenis) {
+      lenis.scrollTo(el, { offset: -80, duration: 1.2 });
+    } else {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
 
   return (
     <motion.nav
@@ -63,7 +69,10 @@ const Navbar = () => {
         >
           {isDark ? <Moon size={22} /> : <Sun size={22} />}
         </button>
-        <button className="p-3 rounded-xl text-muted-foreground hover:text-foreground transition-colors">
+        <button
+          onClick={() => handleClick("Contact", "#contact")}
+          className="p-3 rounded-xl text-muted-foreground hover:text-foreground transition-colors"
+        >
           <LogIn size={22} />
         </button>
       </div>

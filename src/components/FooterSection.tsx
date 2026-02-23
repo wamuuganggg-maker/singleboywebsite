@@ -48,7 +48,22 @@ const Footer = () => {
             <h4 className="font-bold text-white mb-4">Navigation</h4>
             <div className="space-y-2.5">
               {navLinks.map((link) => (
-                <a key={link.label} href={link.href} className="block text-sm text-[#6ec8d7] hover:text-white transition-colors">
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const el = document.querySelector(link.href);
+                    if (!el) return;
+                    const lenis = (window as any).__lenis;
+                    if (lenis) {
+                      lenis.scrollTo(el, { offset: -80, duration: 1.2 });
+                    } else {
+                      el.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  className="block text-sm text-[#6ec8d7] hover:text-white transition-colors cursor-pointer"
+                >
                   {link.label}
                 </a>
               ))}

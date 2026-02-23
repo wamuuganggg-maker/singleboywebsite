@@ -17,32 +17,34 @@ const queryClient = new QueryClient();
 const App = () => {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.0,
-      easing: (t) => 1 - Math.pow(1 - t, 4),
+      duration: 0.8,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
       smoothWheel: true,
-      touchMultiplier: 1.5,
-      wheelMultiplier: 1,
+      touchMultiplier: 1.2,
+      wheelMultiplier: 0.8,
       infinite: false,
       autoResize: true,
     });
 
-    // Sync Lenis scroll with GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
 
-    // Use RAF for butter-smooth sync
     const rafCallback = (time: number) => {
       lenis.raf(time * 1000);
     };
     gsap.ticker.add(rafCallback);
     gsap.ticker.lagSmoothing(0);
+    gsap.ticker.fps(60);
 
-    // Force ScrollTrigger refresh after layout settles
     const refreshTimeout = setTimeout(() => {
       ScrollTrigger.refresh();
-    }, 500);
+    }, 300);
+
+    // Make lenis available globally for smooth scroll navigation
+    (window as any).__lenis = lenis;
 
     return () => {
       clearTimeout(refreshTimeout);
+      delete (window as any).__lenis;
       lenis.destroy();
       gsap.ticker.remove(rafCallback);
       ScrollTrigger.getAll().forEach((st) => st.kill());
