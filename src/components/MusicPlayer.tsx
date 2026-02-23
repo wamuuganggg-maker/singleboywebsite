@@ -159,20 +159,6 @@ const MusicPlayer = () => {
           </button>
         </div>
 
-        {/* Volume slider */}
-        <div className="flex items-center gap-2 mt-2">
-          <VolumeX size={12} className="text-muted-foreground" />
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={isMuted ? 0 : volume}
-            onChange={handleVolumeChange}
-            className="w-full h-1 rounded-full appearance-none bg-background/50 accent-primary cursor-pointer [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:appearance-none"
-          />
-          <Volume2 size={12} className="text-muted-foreground" />
-        </div>
       </div>
     </motion.div>
   );
