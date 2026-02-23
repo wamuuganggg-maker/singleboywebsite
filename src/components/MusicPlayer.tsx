@@ -21,7 +21,7 @@ const MusicPlayer = () => {
   useEffect(() => {
     const audio = new Audio("/music/memory-reboot.mp3");
     audio.volume = volume;
-    audio.preload = "metadata";
+    audio.preload = "auto";
     audioRef.current = audio;
 
     audio.addEventListener("loadedmetadata", () => setDuration(audio.duration));
