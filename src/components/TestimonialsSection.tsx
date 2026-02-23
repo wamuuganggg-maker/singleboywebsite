@@ -21,14 +21,29 @@ const testimonials = [
     role: "Founder Of Xyron Development",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=F34R",
   },
+  {
+    text: "asdood",
+    author: "Glide BEE",
+    role: "dood",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Glide",
+  },
+  {
+    text: "Hoohihoo",
+    author: "F34R Reacts F34R Reacts",
+    role: "Founder Of Xyron Development",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=F34R2",
+  },
 ];
+
+// Double the array for seamless infinite scroll
+const doubledTestimonials = [...testimonials, ...testimonials];
 
 const TestimonialsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section className="py-20 px-4">
+    <section className="py-20 px-4 overflow-hidden">
       <div className="max-w-5xl mx-auto">
         <motion.div
           ref={ref}
@@ -39,7 +54,29 @@ const TestimonialsSection = () => {
         >
           <div>
             <h2 className="text-4xl md:text-5xl font-bold">
-              Client{" "}<span className="relative inline-block"><span className="absolute inset-0" style={{ background: "hsl(270 70% 35%)", borderRadius: "6px", clipPath: "polygon(3% 10%, 97% 0%, 100% 90%, 0% 100%)", transform: "rotate(3deg) scale(1.05)" }} /><span className="relative inline-block px-3 py-1 text-primary-foreground" style={{ background: "hsl(270 70% 55%)", borderRadius: "6px", clipPath: "polygon(2% 8%, 98% 2%, 97% 92%, 1% 100%)", transform: "rotate(-2deg)" }}>Testimonials</span></span>
+              Client{" "}
+              <span className="relative inline-block">
+                <span
+                  className="absolute inset-0"
+                  style={{
+                    background: "hsl(270 70% 35%)",
+                    borderRadius: "6px",
+                    clipPath: "polygon(3% 10%, 97% 0%, 100% 90%, 0% 100%)",
+                    transform: "rotate(3deg) scale(1.05)",
+                  }}
+                />
+                <span
+                  className="relative inline-block px-3 py-1 text-primary-foreground"
+                  style={{
+                    background: "hsl(270 70% 55%)",
+                    borderRadius: "6px",
+                    clipPath: "polygon(2% 8%, 98% 2%, 97% 92%, 1% 100%)",
+                    transform: "rotate(-2deg)",
+                  }}
+                >
+                  Testimonials
+                </span>
+              </span>
             </h2>
             <p className="mt-3 text-muted-foreground text-sm italic">
               See what others are saying about my work.
@@ -53,15 +90,30 @@ const TestimonialsSection = () => {
             Leave a Review
           </motion.button>
         </motion.div>
+      </div>
 
-        <div className="grid md:grid-cols-3 gap-5">
-          {testimonials.map((t, i) => (
-            <motion.div
+      {/* Infinite scrolling marquee */}
+      <div className="relative w-full">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-background to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+
+        <motion.div
+          className="flex gap-5 w-max"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{
+            x: {
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 25,
+              ease: "linear",
+            },
+          }}
+        >
+          {doubledTestimonials.map((t, i) => (
+            <div
               key={i}
-              className="glass-hover rounded-2xl p-6 flex flex-col"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1 + i * 0.1, duration: 0.5 }}
+              className="glass-hover rounded-2xl p-6 flex flex-col w-[280px] shrink-0"
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="flex gap-1">
@@ -79,9 +131,9 @@ const TestimonialsSection = () => {
                   <p className="text-xs text-primary">{t.role}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
