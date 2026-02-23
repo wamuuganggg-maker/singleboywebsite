@@ -70,7 +70,7 @@ const HeroProfile = () => {
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Bot size={14} className="text-primary" />
-              <span>Discord Bot Developer</span>
+              <span>Mc Server Developer</span>
             </div>
           </div>
 
