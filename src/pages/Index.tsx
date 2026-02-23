@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import HeroProfile from "@/components/HeroProfile";
@@ -19,6 +19,39 @@ const Index = () => {
 
   const handleLoadingComplete = useCallback(() => {
     setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    // Disable right-click context menu
+    const handleContextMenu = (e: MouseEvent) => e.preventDefault();
+
+    // Block common DevTools shortcuts
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // F12
+      if (e.key === "F12") e.preventDefault();
+      // Ctrl+Shift+I / Cmd+Option+I (DevTools)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === "I") e.preventDefault();
+      // Ctrl+Shift+J / Cmd+Option+J (Console)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === "J") e.preventDefault();
+      // Ctrl+Shift+C (Inspect element)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === "C") e.preventDefault();
+      // Ctrl+U / Cmd+U (View source)
+      if ((e.ctrlKey || e.metaKey) && e.key === "u") e.preventDefault();
+    };
+
+    document.addEventListener("contextmenu", handleContextMenu);
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Disable text selection via CSS
+    document.body.style.userSelect = "none";
+    document.body.style.webkitUserSelect = "none";
+
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.userSelect = "";
+      document.body.style.webkitUserSelect = "";
+    };
   }, []);
 
   if (loading) {
