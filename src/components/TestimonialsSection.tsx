@@ -4,34 +4,34 @@ import { Star, Quote, Plus } from "lucide-react";
 
 const testimonials = [
   {
-    text: "heheha",
+    text: "Bhai kya mast portfolio hai, design ekdum clean aur smooth! Loved it 🔥",
     author: "Tom Kreissler",
     role: "Cubiq Studios",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Tom",
   },
   {
-    text: "ko",
+    text: "Amazing work! The animations and overall vibe of this portfolio is next level. Highly recommended!",
     author: "Xyron Development",
-    role: "ok",
+    role: "Development Studio",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Xyron",
   },
   {
-    text: "Heehhee",
-    author: "F34R Reacts F34R Reacts",
+    text: "I love this portfolio! Super professional and the attention to detail is insane. Great job Pratiyush! 🚀",
+    author: "F34R Reacts",
     role: "Founder Of Xyron Development",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=F34R",
   },
   {
-    text: "asdood",
+    text: "Yaar ye website dekh ke maza aa gaya, bohot solid kaam kiya hai. Keep grinding bro! 💪",
     author: "Glide BEE",
-    role: "dood",
+    role: "Content Creator",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Glide",
   },
   {
-    text: "Hoohihoo",
-    author: "F34R Reacts F34R Reacts",
-    role: "Founder Of Xyron Development",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=F34R2",
+    text: "One of the best portfolios I've seen! Everything feels so polished and buttery smooth. 10/10 would recommend.",
+    author: "Arjun Verma",
+    role: "Full Stack Developer",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Arjun",
   },
 ];
 
